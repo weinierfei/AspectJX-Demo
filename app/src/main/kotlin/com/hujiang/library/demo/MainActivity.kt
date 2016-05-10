@@ -6,23 +6,27 @@ import android.os.Bundle
 
 open class MainActivity : Activity() {
 
-    open override fun onCreate(savedInstanceState: Bundle?) {
+    override open fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         findViewById(R.id.aop_activity).setOnClickListener {
-            startActivity(Intent(this@MainActivity, AOPActivity::class.java)) }
+            startActivity(Intent(this@MainActivity, AOPActivity::class.java))
+        }
         findViewById(R.id.aop_fragment).setOnClickListener {
-            startActivity(Intent(this@MainActivity, FragmentActivity::class.java)) }
+            startActivity(Intent(this@MainActivity, FragmentActivity::class.java))
+        }
         findViewById(R.id.aop_kotlin).setOnClickListener {
-            Greeter().greet() }
+            Greeter().greet()
+        }
         findViewById(R.id.aop_normal_class).setOnClickListener {
-            NormalClass("normalClass").work() }
+            NormalClass("normalClass").work()
+        }
 
-//        var img : ImageView = findViewById(R.id.img_t) as ImageView
+        //        var img : ImageView = findViewById(R.id.img_t) as ImageView
 
         //http://cichang.hujiang.com/images/friendquan_share.png
-//        ImageLoader.getInstance().displayImage("http://cichang.hujiang.com/images/friendquan_share.png", img)
+        //        ImageLoader.getInstance().displayImage("http://cichang.hujiang.com/images/friendquan_share.png", img)
     }
 
     override fun onResume() {

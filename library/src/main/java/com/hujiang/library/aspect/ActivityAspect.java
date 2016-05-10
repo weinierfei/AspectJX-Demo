@@ -11,6 +11,10 @@ import android.util.Log;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+
+//import com.hujiang.common.util.ToastUtils;
+//import com.hujiang.framework.app.RunTimeManager;
 
 //import com.hujiang.common.util.ToastUtils;
 //import com.hujiang.framework.app.RunTimeManager;
@@ -60,6 +64,21 @@ public class ActivityAspect {
     public void onResumeMethod(JoinPoint joinPoint) throws Throwable {
         Log.i("helloAOP", "aspect:::" + joinPoint.getSignature());
     }
+
+    @Before("call(* com.hujiang.library.demo.AOPActivity.setList())")
+    public void println(JoinPoint joinPoint){
+        Log.i("helloAOP", "aspect:::我自己的不+printlnBe" + joinPoint.getSignature());
+    }
+    @After("call(* com.hujiang.library.demo.AOPActivity.setList())")
+    public void printlnAf(JoinPoint joinPoint){
+        Log.i("helloAOP", "aspect:::我自己的不+printlnAf" + joinPoint.getSignature());
+    }
+
+//    @Around("call(* com.hujiang.library.demo.AOPActivity.setList())")
+//    public void printlnAR(JoinPoint joinPoint) throws Throwable {
+//        Log.i("helloAOP", "aspect:::+printlnAR" + joinPoint.getSignature());
+//    }
+
 
     ///////////
     @After("execution(* com.hujiang.library.demo.Greeter.**())")

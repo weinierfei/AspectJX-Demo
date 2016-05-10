@@ -4,7 +4,7 @@ apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.0"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.hujiang.hujiangsdk.demo"
@@ -38,10 +38,10 @@ android {
     }
 }
 
-aspectjx {
-    //指定只对含有关键字'universal-image-loader', 'AspectJX-Demo/library'的库进行织入扫描，忽略其他库，提升编译效率
-    jarFilter 'universal-image-loader', 'AspectJX-Demo/library'
-}
+//aspectjx {
+//    //指定只对含有关键字'universal-image-loader', 'AspectJX-Demo/library'的库进行织入扫描，忽略其他库，提升编译效率
+//    jarFilter 'universal-image-loader', 'AspectJX-Demo/library'
+//}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
