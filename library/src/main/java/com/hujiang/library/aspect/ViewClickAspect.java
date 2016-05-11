@@ -15,7 +15,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 /**
@@ -47,7 +46,7 @@ public class ViewClickAspect {
     public void onClickEntryPoint() {
     }
 
-    @Before("onClickEntryPoint()")
+    //@Before("onClickEntryPoint()")
     public void onClickBefore(JoinPoint joinPoint) {
         Log.i(TAG, "点击按钮前==> Clicked on : " + ((Button) joinPoint.getArgs()[0]).getText());
     }
@@ -81,5 +80,7 @@ public class ViewClickAspect {
     public void onClickAfterReturning() {
         Log.i(TAG, "点击执行完以后在执行我 ==>");
     }
+
+
 
 }
