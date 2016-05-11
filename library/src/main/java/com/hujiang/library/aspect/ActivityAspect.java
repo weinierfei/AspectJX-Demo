@@ -12,6 +12,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 //import com.hujiang.common.util.ToastUtils;
 //import com.hujiang.framework.app.RunTimeManager;
@@ -104,5 +105,35 @@ public class ActivityAspect {
     @After("execution(* com.hujiang.library.demo.NormalClass.**(..))")
     public void aspectNormalClass(JoinPoint joinPoint) throws Throwable {
         Log.i("helloAOP", "aspect:::" + joinPoint.getSignature());
+        Log.i("helloAOP", "aspect:::" + joinPoint.getSourceLocation());
+        Log.i("helloAOP", "aspect:::" + joinPoint.getTarget());
+    }
+
+    //public Pointcut testAll() : call(public*  *.println(..)) && !within(TestAspect) ;
+
+
+
+    @Pointcut("execution(* com.hujiang.library.demo.AOPActivity.onCreate(..)) ||"
+            +"execution(* com.hujiang.library.demo.AOPActivity.onStart(..))")
+    public void logForActivity(){};
+
+
+    @Before("logForActivity()")
+    public void log(JoinPoint joinPoint){
+        //对于使用Annotation的AspectJ而言，JoinPoint就不能直接在代码里得到多了，而需要通过
+        //参数传递进来。
+        Log.e("helloAOP", "测试"+joinPoint.toShortString());
+    }
+
+
+    @After("call(* com.hujiang.library.demo.AOPActivity.getDatas(..))")
+    public void aspectgetDatas(JoinPoint joinPoint) throws Throwable {
+        Log.i("helloAOP", "aspect:::" + joinPoint.getSignature());
+        Log.i("helloAOP", "this===" + joinPoint.getThis().getClass().getName());
+        Log.i("helloAOP", "方法名==" + joinPoint.getSignature().getName());
+        final Object[] args = joinPoint.getArgs();
+        for (int i = 0; i < args.length; i++) {
+            Log.i("helloAOP", "参数===" + args[i].toString());
+        }
     }
 }
