@@ -7,12 +7,21 @@ package com.hujiang.library.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.base.adapter.ViewHolder;
+import com.zhy.base.adapter.abslistview.CommonAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class description here
@@ -26,7 +35,9 @@ public class AOPActivity extends Activity {
     private static final String TAG = "AOPActivity";
 
     Button mButton;
+    private ListView listView;
 
+    private List<String> datas = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +63,30 @@ public class AOPActivity extends Activity {
                 Log.i(TAG, "图片被点击了");
             }
         });
+
+        listView = (ListView) findViewById(R.id.listView);
+
+        for (int i = 0; i < 10; i++) {
+
+            datas.add("我是测试item"+i);
+        }
+
+        CommonAdapter<String> adapter = new CommonAdapter<String>(this,R.layout.aop_item,datas) {
+            @Override
+            public void convert(ViewHolder holder, String o) {
+
+                holder.setText(R.id.textView,o);
+            }
+        };
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AOPActivity.this, "dianji "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -65,11 +100,4 @@ public class AOPActivity extends Activity {
 
         new AspectJavaDemo().work();
     }
-
-
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//
-//        return super.dispatchTouchEvent(ev);
-//    }
 }
