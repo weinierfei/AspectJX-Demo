@@ -6,9 +6,11 @@
 
 package com.hujiang.library.aspect;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -63,6 +65,10 @@ public class ViewClickAspect {
 //        Log.i(TAG, "点击按钮后 ==> Clicked on : " + ((Button) joinPoint.getArgs()[0]).getText());
         Log.i(TAG, "点击按钮后 ==> Clicked on : " + joinPoint.getArgs().length);
         Log.i(TAG, "点击按钮后 ==> Clicked on : " + joinPoint.getArgs()[0].getClass().getName());
+        Log.i(TAG, "-------------------------------------------------------");
+        Log.i(TAG, "点击按钮后 ==> 目标对象      : " + joinPoint.getTarget().toString());
+        Log.i(TAG, "点击按钮后 ==> AOP代理对象   : " + joinPoint.getThis().toString());
+        Log.i(TAG, "-------------------------------------------------------");
 
         Object object = joinPoint.getArgs()[0];
         if (object instanceof Button) {
@@ -70,8 +76,20 @@ public class ViewClickAspect {
             int btnId = ((Button) object).getId();
             Log.i(TAG, "Button.text= " + btnText + "      Button.id==" + btnId);
         } else if (object instanceof ImageView) {
-            int btnId = ((ImageView) object).getId();
+            ImageView imageView =(ImageView) object;
+            int btnId = imageView.getId();
+            String url = (String) imageView.getTag();
             Log.i(TAG, "ImageView.id==" + btnId);
+            Log.i(TAG, "ImageView.url==" + url);
+        }else if (object instanceof TextView) {
+            TextView textView =(TextView) object;
+            int btnId = textView.getId();
+            String text = textView.getText().toString();
+            Context context = textView.getContext();
+
+            Log.i(TAG, "TextView.id==" + btnId);
+            Log.i(TAG, "TextView.text==" + text);
+            Log.i(TAG, "TextView.Context==" + context);
         }
 
     }
