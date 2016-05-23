@@ -6,10 +6,10 @@
 
 package com.hujiang.library.aspect;
 
-import android.content.Context;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.aspectj.lang.JoinPoint;
@@ -71,25 +71,38 @@ public class ViewClickAspect {
         Log.i(TAG, "-------------------------------------------------------");
 
         Object object = joinPoint.getArgs()[0];
-        if (object instanceof Button) {
-            String btnText = ((Button) object).getText().toString();
-            int btnId = ((Button) object).getId();
-            Log.i(TAG, "Button.text= " + btnText + "      Button.id==" + btnId);
-        } else if (object instanceof ImageView) {
-            ImageView imageView =(ImageView) object;
-            int btnId = imageView.getId();
-            String url = (String) imageView.getTag();
-            Log.i(TAG, "ImageView.id==" + btnId);
-            Log.i(TAG, "ImageView.url==" + url);
-        }else if (object instanceof TextView) {
-            TextView textView =(TextView) object;
-            int btnId = textView.getId();
-            String text = textView.getText().toString();
-            Context context = textView.getContext();
 
-            Log.i(TAG, "TextView.id==" + btnId);
+        if (object instanceof Button) {//如果点击的是button
+            //button上得文字
+            String btnText = ((Button) object).getText().toString();
+            //连接点唯一标识   ??
+            int btnId = ((Button) object).getId();
+            Log.i(TAG, "Button.text= " + btnText);
+            Log.i(TAG, "Button.id==" + btnId);
+
+        } else if (object instanceof ImageView) { //如果点击的是ImageView,给ImageView打tag后,可以获取tag
+            ImageView imageView = (ImageView) object;
+            int imgId = imageView.getId();
+            String url = (String) imageView.getTag();
+            Log.i(TAG, "ImageView.id==" + imgId);
+            Log.i(TAG, "ImageView.url==" + url);
+
+        } else if (object instanceof TextView) {//如果点击的是TextView
+            TextView textView = (TextView) object;
+            int tvId = textView.getId();
+            String text = textView.getText().toString();
+
+            Log.i(TAG, "TextView.id==" + tvId);
             Log.i(TAG, "TextView.text==" + text);
-            Log.i(TAG, "TextView.Context==" + context);
+        } else if (object instanceof LinearLayout) {//如果点击的是LinearLayout
+            LinearLayout linearLayout = (LinearLayout) object;
+            int llId = linearLayout.getId();
+            int childNum = linearLayout.getChildCount();
+            String tag= (String) linearLayout.getTag();
+
+            Log.i(TAG, "LinearLayout.id==" + llId);
+            Log.i(TAG, "LinearLayout.childNum==" + childNum);
+            Log.i(TAG, "LinearLayout.tag==" + tag);
         }
 
     }

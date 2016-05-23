@@ -41,6 +41,7 @@ public class AOPActivity extends Activity {
     private ListView listView;
 
     private List<Map> datas = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +58,11 @@ public class AOPActivity extends Activity {
         tv_test_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AOPActivity.this,FragmentActivity.class);
+                Intent intent = new Intent(AOPActivity.this, FragmentActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("TEST",false);
-                bundle.putString("name","张三");
-                bundle.putString("first","李四");
+                bundle.putBoolean("TEST", false);
+                bundle.putString("name", "张三");
+                bundle.putString("first", "李四");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -73,6 +74,7 @@ public class AOPActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "mButton被点击了");
+                startActivity(new Intent(AOPActivity.this, VideoPlayActivity.class));
             }
         });
 
@@ -89,12 +91,12 @@ public class AOPActivity extends Activity {
         for (int i = 0; i < 10; i++) {
 
             map = new HashMap();
-            map.put("name","我是测试item"+i);
-            map.put("title","标题"+i);
+            map.put("name", "我是测试item" + i);
+            map.put("title", "标题" + i);
             datas.add(map);
         }
 
-        CommonAdapter<Map> adapter = new CommonAdapter<Map>(this,R.layout.aop_item,datas) {
+        CommonAdapter<Map> adapter = new CommonAdapter<Map>(this, R.layout.aop_item, datas) {
             @Override
             public void convert(ViewHolder holder, Map o) {
                 holder.setText(R.id.tv_title, (String) o.get("title"));
@@ -107,7 +109,7 @@ public class AOPActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AOPActivity.this, "dianji "+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AOPActivity.this, "dianji " + position, Toast.LENGTH_SHORT).show();
             }
         });
     }
